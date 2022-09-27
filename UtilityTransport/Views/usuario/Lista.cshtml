@@ -1,0 +1,84 @@
+﻿@model List<UtilityTransport_DLL.Models.SP_Usuario_Consulta_Result>
+
+@{
+    ViewBag.Title = "Lista";
+    Layout = "~/Views/Shared/_LayoutPagePrincipal.cshtml";
+}
+
+<h2>Lista de Usuarios</h2>
+
+<form name="frmFormulario" id="frmFormulario" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="label">Código</label>
+            <input class="form-control w-250" type="text" name="strCodigo" id="strCodigo" value="" />
+        </div>
+        <div class="col-lg-3">
+            <label class="label">Nombre</label>
+            <input class="form-control w-250" type="text" name="strNombre" id="strNombre" value="" />
+        </div>
+        <div class="col-lg-3">
+            <label class="label">Cedula</label>
+            <input class="form-control w-250" type="text" name="strCedula" id="strCedula" value="" />
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row col-lg-10">
+        <div class="col-lg-2">
+            <button title="Buscar" class="btn btn-success btn-success" value="Buscar" name="btnBuscar" id="btnBuscar">
+                <i class="fa fa-search"></i> Buscar
+            </button>
+        </div>
+        <div class="col-lg-2">
+            <a title="Nuevo" class="btn btn-info" href="@Response.ApplyAppPathModifier("~/Usuario/Mantenimiento?strCodProceso=I")"><span class="fa fa-edit"></span> Nuevo</a>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    @{
+        if (this.Model.Count > 0)
+        {
+            @*<table id="TablaBusqueda" name="TablaBusqueda" class="paginated-table table table-striped table-bordered table-sm" cellspacing="0" style="width:85%">*@
+                <table id="TablaBusqueda" name="TablaBusqueda" class="table table-bordered table-striped table-responsive-sm table-sm">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="col-3">Código</th>
+                        <th class="col-4">Nombre</th>
+                        <th class="col-3">Cedula</th>
+                        <th class="col-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (UtilityTransport_DLL.Models.SP_Usuario_Consulta_Result PosicionModelo in this.Model)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-3">@PosicionModelo.Codigo</td>
+                            <td class="col-4">@PosicionModelo.Nombre_Completo</td>
+                            <td class="col-3">@PosicionModelo.Cedula</td>
+                            <td class="col-2">
+                                <div class="text-center">
+                                    <a title="Modificar" class="btn btn-primary btn-md center-block w-60px h-35px" href="@Response.ApplyAppPathModifier("~/Usuario/Mantenimiento?strCodProceso=M&strCodigo="+@PosicionModelo.Codigo)"><i class="fa fa-edit"></i> </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center">
+                <h2>Sin Registros para Mostrar</h2>
+            </div>
+        }
+    }
+
+</form>

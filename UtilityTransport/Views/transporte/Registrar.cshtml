@@ -1,0 +1,235 @@
+﻿@model UtilityTransport_DLL.Models.transporteModel
+
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_LayoutPagePrincipal.cshtml";
+}
+
+<h2>Registrar</h2>
+
+<form name="frmFormulario" id="frmFormulario" method="post" style="position:relative">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="CodProceso" id="CodProceso" value="@ViewBag.strCodProceso" />
+
+    <div class="row col-lg-10">
+        <div class="col-lg-2">
+            <button title="Guardar" class="btn btn-success btn-success" value="Guardar" name="btnGuardar" id="btnGuardar">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+        </div>
+    </div>
+    <br />
+
+    <h2>Usuario</h2>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="label">FACTURA:</label>
+            <input class="form-control w-250" type="text" name="NumFactura" id="NumFactura" value="" />
+        </div>
+        <div class="col-lg-3">
+            <label class="label">CLIENTE</label>
+            <input class="form-control w-350" type="text" name="Cliente" id="Cliente" value="" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-7">
+            <label class="label">DETALLE DE DIRECCIÓN</label>
+            <input class="form-control w-650" type="text" name="Detalle" id="Detalle" value="" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="label">CHOFER</label>
+            <select id="IdChofer" name="IdChofer" class="classRequerido form-control w-250">
+                <option value="">Seleccione un Chofer</option>
+                @{
+                    foreach (UtilityTransport_DLL.Models.SP_Chofer_Consulta_Result chofer in ViewBag.lstChoferes)
+                    {
+                        <option value="@chofer.Codigo">@chofer.Nombre</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-lg-3">
+            <label class="label">DETALLE PAGO:</label>
+            <input class="form-control w-250" type="text" name="DetallePago" id="DetallePago" value=""/>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="label">VENDEDOR:</label>
+            <input class="form-control w-250" type="text" name="Vendedor" id="Vendedor" value="" readonly />
+        </div>
+        <div class="col-lg-3">
+            <label class="label">MONTO</label>
+            <input class="form-control w-350" type="text" name="Monto" id="Monto" value="" readonly />
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <div class="col-lg-1">
+            <a title="Regresar" class="btn btn-primary" href="@Response.ApplyAppPathModifier("~/Usuario/Lista")"><span class="fa fa-backward"></span> Regresar al Listado</a>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    function ValidarControles() {
+        $("#frmFormulario").validate({
+            rules: {
+                NumFactura: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 50
+                },
+                Cliente: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 100
+                },
+                Detalle: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 500
+                },
+                Monto: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 200
+                },
+                Vendedor: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 200
+                },
+                IdChofer: {
+                    required: true,
+                },
+                DetallePago: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 200
+                }
+            },
+            errorPlacement: function(error, element) {
+                element.attr("placeholder", error.text());
+            }
+        });
+    }
+
+    function EstableceEventosChange() {
+        $("#NumFactura").change(function () {
+            var Num_Factura = $("#NumFactura").val();
+            if (Num_Factura != '') {
+                obtenerFactura(Num_Factura);
+            }
+        });
+    }
+
+    
+    function obtenerFactura(strNumFactura) {
+        var url = '@Url.Action("obtenerFactura", "transporte")';
+        var parametros =
+        {
+            strNumFactura: strNumFactura
+        };
+
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(parametros),
+
+            success: function (data, textStatus, jQxhr) {
+                if (data.lblRegistrada == false && data.strCliente != null) {
+                    $("#Cliente").val(data.strCliente);
+                    $("#Monto").val(data.nMonto);
+                    $("#Vendedor").val(data.strVendedor);
+                    $("#Detalle").focus();
+                }
+                else {
+                    if (data.lblRegistrada) {
+                        if (data.lblEditable) {
+                            bootbox.confirm({
+                                message: "Esta factura ya tiene un transporte registrado, desea modificarlo?",
+                                buttons: {
+                                    confirm: {
+                                        label: 'Si',
+                                        className: 'btn-success'
+                                    },
+                                    cancel: {
+                                        label: 'No',
+                                        className: 'btn-danger'
+                                    }
+                                },
+                                callback: function (result) {
+                                    if (result == true) {
+                                        $("#CodProceso").val("M");
+                                        $("#Cliente").val(data.strCliente);
+                                        $("#Detalle").val(data.strDetalle);
+                                        $("#Monto").val(data.nMonto);
+                                        $("#Vendedor").val(data.strVendedor);
+                                        $("#IdChofer").val(data.nIdChofer);
+                                        $("#DetallePago").val(data.strDetallePago);
+                                        $("#Cliente").focus();
+                                    }
+                                    else {
+                                        $("#NumFactura").val('');
+                                        $("#Cliente").val('');
+                                        $("#Monto").val('');
+                                        $("#Vendedor").val('');
+                                        $("#IdChofer").val('');
+                                        $("#DetallePago").val('');
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            bootbox.alert({
+                                message: "Ya existe un transporte registrado y enviado para esa Factura.",
+                                className: 'rubberBand animated modal-top',
+                                callback: function () {
+                                    $("#NumFactura").val('');
+                                    $("#Cliente").val('');
+                                    $("#Monto").val('');
+                                    $("#Vendedor").val('');
+                                    $("#IdChofer").val('');
+                                    $("#DetallePago").val('');
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        bootbox.alert({
+                            message: "No existe una factura registrada con ese numero.",
+                            className: 'rubberBand animated modal-top',
+                            callback: function () {
+                                $("#Cliente").val('');
+                            }
+                        });
+                    }
+                }
+            },
+
+            error: function (jQxhr, textStatus, errorThrown) {
+                alert(jQxhr)
+                alert(textStatus)
+                alert(errorThrown)
+            }
+        });
+    }
+
+
+
+</script>

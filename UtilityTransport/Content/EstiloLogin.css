@@ -1,0 +1,30 @@
+﻿body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: table;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#frmLogin {
+    border-radius: 15px;
+    border: 2px solid rgba(250,239,80,0.5);
+    display: table;
+    margin: auto;
+    text-align: center;
+}
+
+.form-control {
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 250px;
+}
+
+    .form-control:hover {
+        background-color: lavenderblush;
+    }

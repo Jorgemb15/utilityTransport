@@ -1,0 +1,108 @@
+﻿@model List<UtilityTransport_DLL.Models.SP_Transporte_Consulta_Result>
+
+@{
+    ViewBag.Title = "Mantenimiento";
+    Layout = "~/Views/Shared/_LayoutPagePrincipal.cshtml";
+}
+
+
+
+<form name="frmFormulario" id="frmFormulario" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="CodProceso" id="CodProceso" value="@ViewBag.strCodProceso" />
+
+    <div class="row col-lg-10">
+        <div class="col-lg-2">
+            <button title="Guardar" class="btn btn-success btn-success" value="Guardar" name="btnGuardar" id="btnGuardar">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+        </div>
+    </div>
+    <br />
+
+    <table id="Prueba" name="Prueba" class="table table-bordered table-striped table-responsive-sm table-sm">
+        <thead>
+            <tr class="d-flex">
+                <th class="col-1">Prioridad</th>
+                <th class="col-2">Num. Factura</th>
+                <th class="col-3">Cliente</th>
+                <th class="col-2">Fecha Registro</th>
+                <th class="col-4">Detalle</th>
+            </tr>
+        </thead>
+        <tbody name="CuerpoTabla" id="CuerpoTabla">
+            @{
+                int nContador = 0;
+
+                foreach (UtilityTransport_DLL.Models.SP_Transporte_Consulta_Result PosicionModelo in Model)
+                {
+                    <tr name="[@nContador]" id="[@nContador]" class="d-flex">
+                        <input name="[@nContador].Codigo" id="test[@nContador].Codigo" type="hidden" value="@PosicionModelo.Codigo" />
+                        <td class="col-1">
+                            <select identificador="@nContador" id="[@nContador].Prioridad" name="[@nContador].Prioridad" class="@("Prioridad" + nContador.ToString()) selectedPrioridad form-control">
+                                @{
+                                    for (int nValor = 0; nValor < Model.Count(); nValor++)
+                                    {
+                                        <option value="@(nValor + 1)" @(nValor == nContador ? "selected" : "")>@(nValor + 1)</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                        <td class="col-2">
+                            <div class="text-center">
+                                <input style="font-size: 12px;" class="form-control" type="text" name="[@nContador].NumFactura" id="[@nContador].NumFactura" value="@PosicionModelo.NumFactura" readonly />
+                            </div>
+                        </td>
+                        <td class="col-3">
+                            <div class="text-center">
+                                <input style="font-size: 12px;" class="form-control" type="text" name="[@nContador].Cliente" id="[@nContador].Cliente" value="@PosicionModelo.Cliente" readonly />
+                            </div>
+                        </td>
+                        <td class="col-2">
+                            <div class="text-center">
+                                <input style="font-size: 12px;" class="form-control" type="text" name="[@nContador].FechaRegistro" id="[@nContador].FechaRegistro" value="@PosicionModelo.FechaRegistro.ToString("MM/dd/yyyy hh:mm tt")" readonly />
+                            </div>
+                        </td>
+                        <td class="col-4">
+                            <div class="text-center">
+                                <input style="font-size: 12px;" class="form-control" type="text" name="[@nContador].Detalle" id="[@nContador].Detalle" value="@PosicionModelo.Detalle" readonly />
+                            </div>
+                        </td>
+                    </tr>
+                    nContador = nContador + 1;
+                }
+                <script>
+                var nContador = @nContador;
+                </script>
+            }
+        </tbody>
+    </table>
+    <br />
+
+</form>
+<script>
+
+    function ValidarControles() {
+        $(".selectedPrioridad").on('focus', function () {
+            var ddl = $(this);
+            ddl.data('previous', ddl.val());
+        }).on('change', function () {
+            let ddl = $(this);
+            let valorAnterior = ddl.data('previous');
+            let nuevoValor = ddl.val();
+            let idObjeto = ddl.attr('identificador');
+
+            for (let nValor = 0; nValor < nContador; nValor++) {
+                if (idObjeto != nValor) {
+                    let nombreId = ".Prioridad" + nValor;
+                    let valor = $(nombreId).val();
+                    if (valor == nuevoValor) {
+                        $(nombreId).val(valorAnterior);
+                    }
+                }
+            }
+        });
+    }
+
+</script>

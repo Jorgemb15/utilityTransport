@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityTransport", "UtilityTransport\UtilityTransport.csproj", "{4967AC66-9464-4C7C-81AA-E2DFF5878CDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityTransport-DLL", "UtilityTransport-DLL\UtilityTransport-DLL.csproj", "{18686C77-3704-4273-829F-4D630574B91B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4967AC66-9464-4C7C-81AA-E2DFF5878CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4967AC66-9464-4C7C-81AA-E2DFF5878CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4967AC66-9464-4C7C-81AA-E2DFF5878CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18686C77-3704-4273-829F-4D630574B91B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18686C77-3704-4273-829F-4D630574B91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18686C77-3704-4273-829F-4D630574B91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18686C77-3704-4273-829F-4D630574B91B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

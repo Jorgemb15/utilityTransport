@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    @Styles.Render("~/Content/css")
+
+    <link href="~/Content/EstiloPagina.css" rel="stylesheet" />
+    <link href="~/Content/EstiloLogin.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <form id="frmLogin" name="frmLogin" method="post" asp-antiforgery="true" action="@Url.Action("Index", "Login")">
+        @Html.AntiForgeryToken()
+        <br />
+        <div class="editor-label">
+            <label>Usuario:</label>
+            <input id="StrUsuario" name="StrUsuario" class="form-control" type="text" placeholder="Usuario" />
+        </div>
+        <div class="editor-label">
+            <label>Clave:</label>
+            <input id="StrClave" name="StrClave" class="form-control" type="password" placeholder="Clave" />
+        </div>
+        <br />
+        <div class="editor-label">
+            <input type="submit" class="btn btn-success btn-mike" />
+        </div>
+        <div class="editor-label">
+            <div class="ErrorValidacion"></div>
+        </div>
+        <br />
+    </form>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
+    <script src="~/Scripts/bootbox.locales.js"></script>
+
+
+    <script>
+            var strResultado = '@Html.Raw(ViewBag.strResultadoOperacion)';
+    </script>
+
+    <script src="~/Scripts/UtilidadesJavaScript.js"></script>
+
+    <script>
+        //document on ready
+        $(function () {
+            EstableceMensajesJqueryValidate()
+            ValidarControles();
+            ValidarMensajeControlador();
+        });
+
+        function ValidarControles() {
+            $("#frmLogin").validate({
+                rules: {
+                    strUsuario: {
+                        required: true
+                    },
+                    strClave: {
+                        required: true
+                    },
+                    Tipo_Autenticacion: {
+                        required: true
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    element.attr("placeholder", error.text());
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

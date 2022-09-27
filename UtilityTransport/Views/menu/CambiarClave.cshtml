@@ -1,0 +1,64 @@
+﻿@model UtilityTransport_DLL.Models.cambioClaveModel
+
+@{
+    ViewBag.Title = "CambiarClave";
+    Layout = "~/Views/Shared/_LayoutPagePrincipal.cshtml";
+}
+
+<h2>Cambiar Clave</h2>
+
+
+<form name="frmFormulario" id="frmFormulario" method="post" style="position:relative">
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label>Clave:</label>
+            <input id="strClave" name="strClave" class="form-control" type="password" placeholder="Clave" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-4">
+            <label>Confirmar Clave:</label>
+            <input id="strClaveConfirma" name="strClaveConfirma" class="form-control" type="password" placeholder="Confirma Clave" />
+        </div>
+    </div>
+    <br />
+    <div class="editor-label">
+        <input type="submit" class="btn btn-success btn-mike" />
+    </div>
+    <div class="editor-label">
+        <div class="ErrorValidacion"></div>
+    </div>
+    <br />
+
+</form>
+
+
+<script>
+    function ValidarControles() {
+        $("#frmFormulario").validate({
+            rules: {
+                strClave: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
+                },
+                strClaveConfirma: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
+                }
+            },
+            errorPlacement: function(error, element) {
+                element.attr("placeholder", error.text());
+            }
+        });
+
+        LimitarLongitud('strClave', '20');
+        LimitarLongitud('strClaveConfirma', '20');
+    }
+
+
+</script>

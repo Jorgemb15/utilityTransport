@@ -1,0 +1,208 @@
+﻿@model UtilityTransport_DLL.Models.transporteConsultaModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutPagePrincipal.cshtml";
+}
+
+<h2>Dashboard</h2>
+
+<form name="frmFormulario" id="frmFormulario" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="label">NUM. FACTURA</label>
+            <input class="clsSoloNumeros form-control w-250" type="text" name="nCodigo" id="nCodigo" value="" />
+        </div>
+        <div class="col-lg-4">
+            <label class="label">CLIENTE</label>
+            <input class="form-control w-350" type="text" name="strCliente" id="strCliente" value="" />
+        </div>
+        <div class="col-lg-3">
+            <label class="label">ESTADO</label>
+            <select id="nEstado" name="nEstado" class="form-control w-250">
+                <option value="0" @(Model.nEstado == 0 ? "selected":"")>Pendiente</option>
+                <option value="1" @(Model.nEstado == 1 ? "selected":"")>Enviado</option>
+                <option value="" @(Model.nEstado is null ? "selected":"") >Todos</option>
+            </select>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="label">FECHA DESDE</label>
+            <input class="form-control w-250" type="text" name="dFechaDesde" id="dFechaDesde" value="@Model.dFechaDesde.ToString("MM/dd/yyyy")" />
+        </div>
+        <div class="col-lg-3">
+            <label class="label">FECHA HASTA</label>
+            <input class="form-control w-250" type="text" name="dFechaHasta" id="dFechaHasta" value="@Model.dFechaHasta.ToString("MM/dd/yyyy")" />
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row col-lg-10">
+        <div class="col-lg-2">
+            <button title="Buscar" class="btn btn-success btn-success" value="Buscar" name="btnBuscar" id="btnBuscar">
+                <i class="fa fa-search"></i> Buscar
+            </button>
+        </div>
+        <div class="col-lg-2">
+            <a title="Nuevo" class="btn btn-info" href="@Response.ApplyAppPathModifier("~/transporte/Registrar?strCodProceso=I")"><span class="fa fa-edit"></span> Nuevo</a>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    @{
+        if (ViewBag.lstTransportes.Count > 0)
+        {
+            @*<table id="TablaBusqueda" name="TablaBusqueda" class="paginated-table table table-striped table-bordered table-sm" cellspacing="0" style="width:85%">*@
+            <table id="TablaBusqueda" name="TablaBusqueda" class="table table-bordered table-striped table-responsive-sm table-sm">
+                <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">Prioridad</th>
+                        <th class="col-2">Num. Factura</th>
+                        <th class="col-2">Cliente</th>
+                        <th class="col-2">Fecha Registro</th>
+                        <th class="col-3">Detalle</th>
+                        <th class="col-1">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (UtilityTransport_DLL.Models.SP_Transporte_Consulta_Result PosicionModelo in ViewBag.lstTransportes)
+                    {
+                        string strBGColor = "";
+                        strBGColor = PosicionModelo.Estado == 0 ? "bgcolor=#F39C12" : "bgcolor=#52DC33";
+                    <tr class="d-flex">
+                        <td @strBGColor class="col-2">@(PosicionModelo.Prioridad != 99 ? "Prioridad " + PosicionModelo.Prioridad.ToString() : "Enviado sin Prioridad")</td>
+                        <td @strBGColor class="col-2">@PosicionModelo.NumFactura</td>
+                        <td @strBGColor class="col-2">@PosicionModelo.Cliente</td>
+                        <td @strBGColor class="col-2">@PosicionModelo.FechaRegistro.ToString("MM/dd/yyyy hh:mm tt")</td>
+                        <td @strBGColor class="col-3">@PosicionModelo.Detalle</td>
+                        <td @strBGColor class="col-1">
+                            <div class="text-center">
+                                <a id="EnviarTransporte" name="btnEnviar" title="Enviar Transporte" href="#" class="btn btn-info" onclick="EnviarTransporte(@PosicionModelo.Codigo, @(PosicionModelo.Estado == 0 ? "true" : "false"))"><span class="fa fa-car"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center">
+                <h2>Sin Registros para Mostrar</h2>
+            </div>
+        }
+    }
+
+    <div class="modal fade" id="ModalInfoTransporte" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Productos</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divInfoTransporte" class="col-xl-12">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<script>
+
+    function ValidarControles() {
+        AsignarFormatoFecha("#dFechaDesde");
+        AsignarFormatoFecha("#dFechaHasta");
+    }
+    function EnviarTransporte(nCodigo, lblPuedeEnviar) {
+        var urlProducto = 'MostrarDetalleTransporte?' + window.location.href.slice(window.location.href.indexOf('?') + 1);
+
+        $.ajax({
+            url: urlProducto,
+            dataType: "html",
+            type: 'POST',
+            data: {
+                nCodigo: nCodigo,
+                lblPuedeEnviar: lblPuedeEnviar
+            },
+            success: function (data, textStatus, jQxhr) {
+                $("#ModalInfoTransporte").modal();
+                $("#divInfoTransporte").empty().append(data);
+            },
+            error: function (jQxhr, textStatus, errorThrown) {
+                bootbox.alert({
+                    message: "Error al Generar el buscador de Productos",
+                    className: 'rubberBand animated modal-top',
+                    callback: function () {
+                    }
+                });
+            }
+        });
+    }
+
+    function ProcesarEnvioTransporte(nCodigo) {
+        bootbox.prompt({
+            title: "Por favor digite su clave de ingreso si desea Enviar el Transporte?",
+            inputType: 'password',
+            callback: function (result) {
+                var url = '@Url.Action("procesarTransporte","transporte")';
+                var parametros =
+                {
+                    nCodTransporte: nCodigo,
+                    strClave: result
+                };
+
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/json;',
+                    data: JSON.stringify(parametros),
+
+                    success: function (data, textStatus, jQxhr) {
+                        if (data && data.lblResultado == true) {
+                            bootbox.alert({
+                                message: data.strResultado,
+                                className: 'rubberBand animated modal-top',
+                                callback: function () {
+                                    location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            bootbox.alert({
+                                message: data.strResultado,
+                                className: 'rubberBand animated modal-top',
+                                callback: function () {
+                                }
+                            });
+                        }
+                    },
+                    error: function (jQxhr, textStatus, errorThrown) {
+                        bootbox.alert({
+                            message: "Error al procesar el Transporte",
+                            className: 'rubberBand animated modal-top',
+                            callback: function () {
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+</script>

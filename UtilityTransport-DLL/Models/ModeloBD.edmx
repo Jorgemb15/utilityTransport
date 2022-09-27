@@ -1,0 +1,634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="utilityTransportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="SP_Cambio_Clave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="pClave" Type="varchar" Mode="In" />
+          <Parameter Name="pIdprograma" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Canton_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pNombre" Type="varchar" Mode="In" />
+          <Parameter Name="pCodProvincia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Chofer_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Distrito_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pNombre" Type="varchar" Mode="In" />
+          <Parameter Name="pCodCanton" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Obtener_Permisos_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pUsuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Perfil_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pNombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Permiso_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pNombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Provincia_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pNombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Transporte_Asignar_Prioridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pPrioridad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Transporte_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+          <Parameter Name="pCliente" Type="varchar" Mode="In" />
+          <Parameter Name="pEstado" Type="int" Mode="In" />
+          <Parameter Name="pFechaDesde" Type="date" Mode="In" />
+          <Parameter Name="pFechaHasta" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_Transporte_Enviar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pParametros" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="SP_Transporte_Mantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pProceso" Type="char" Mode="In" />
+          <Parameter Name="pParametros" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="SP_Transporte_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Transporte_Obtener_NumFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pNumFactura" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Ubicacion_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodDistrito" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Usuario_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="varchar" Mode="In" />
+          <Parameter Name="pNombre" Type="varchar" Mode="In" />
+          <Parameter Name="pCedula" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Usuario_Mantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pProceso" Type="char" Mode="In" />
+          <Parameter Name="pParametros" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="SP_Usuario_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Usuario_Perfil_Consulta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pCodUsuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Validar_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pTipoAutenticacion" Type="varchar" Mode="In" />
+          <Parameter Name="pUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="pClave" Type="varchar" Mode="In" />
+          <Parameter Name="pIdPrograma" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="utilityTransportModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="utilityTransportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="utilityTransportEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="SP_Cambio_Clave" ReturnType="Collection(String)">
+            <Parameter Name="pCodUsuario" Mode="In" Type="String" />
+            <Parameter Name="pClave" Mode="In" Type="String" />
+            <Parameter Name="pIdprograma" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Canton_Consulta" ReturnType="Collection(utilityTransportModel.SP_Canton_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pNombre" Mode="In" Type="String" />
+            <Parameter Name="pCodProvincia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Chofer_Consulta" ReturnType="Collection(utilityTransportModel.SP_Chofer_Consulta_Result)" />
+          <FunctionImport Name="SP_Distrito_Consulta" ReturnType="Collection(utilityTransportModel.SP_Distrito_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pNombre" Mode="In" Type="String" />
+            <Parameter Name="pCodCanton" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Obtener_Permisos_Usuario" ReturnType="Collection(utilityTransportModel.SP_Obtener_Permisos_Usuario_Result)">
+            <Parameter Name="pUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Perfil_Consulta" ReturnType="Collection(utilityTransportModel.SP_Perfil_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pNombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Permiso_Consulta" ReturnType="Collection(utilityTransportModel.SP_Permiso_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pNombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Provincia_Consulta" ReturnType="Collection(utilityTransportModel.SP_Provincia_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pNombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Transporte_Asignar_Prioridad" ReturnType="Collection(Int32)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pPrioridad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Transporte_Consulta" ReturnType="Collection(utilityTransportModel.SP_Transporte_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+            <Parameter Name="pCliente" Mode="In" Type="String" />
+            <Parameter Name="pEstado" Mode="In" Type="Int32" />
+            <Parameter Name="pFechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="pFechaHasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Transporte_Enviar" ReturnType="Collection(Int32)">
+            <Parameter Name="pParametros" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Transporte_Mantenimiento" ReturnType="Collection(Int32)">
+            <Parameter Name="pProceso" Mode="In" Type="String" />
+            <Parameter Name="pParametros" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Transporte_Obtener" ReturnType="Collection(utilityTransportModel.SP_Transporte_Obtener_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Transporte_Obtener_NumFactura" ReturnType="Collection(utilityTransportModel.SP_Transporte_Obtener_NumFactura_Result)">
+            <Parameter Name="pNumFactura" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Ubicacion_Obtener" ReturnType="Collection(utilityTransportModel.SP_Ubicacion_Obtener_Result)">
+            <Parameter Name="pCodDistrito" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Usuario_Consulta" ReturnType="Collection(utilityTransportModel.SP_Usuario_Consulta_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="String" />
+            <Parameter Name="pNombre" Mode="In" Type="String" />
+            <Parameter Name="pCedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Usuario_Mantenimiento" ReturnType="Collection(String)">
+            <Parameter Name="pProceso" Mode="In" Type="String" />
+            <Parameter Name="pParametros" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Usuario_Obtener" ReturnType="Collection(utilityTransportModel.SP_Usuario_Obtener_Result)">
+            <Parameter Name="pCodigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Usuario_Perfil_Consulta" ReturnType="Collection(utilityTransportModel.SP_Usuario_Perfil_Consulta_Result)">
+            <Parameter Name="pCodUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Validar_Usuario" ReturnType="Collection(utilityTransportModel.SP_Validar_Usuario_Result)">
+            <Parameter Name="pTipoAutenticacion" Mode="In" Type="String" />
+            <Parameter Name="pUsuario" Mode="In" Type="String" />
+            <Parameter Name="pClave" Mode="In" Type="String" />
+            <Parameter Name="pIdPrograma" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_Canton_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="Int32" Name="Cod_Provincia" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_Chofer_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_Distrito_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="Int32" Name="Cod_Canton" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_Obtener_Permisos_Usuario_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="CodPadre" Nullable="true" />
+          <Property Type="Boolean" Name="EsFormulario" Nullable="true" />
+          <Property Type="String" Name="PathFormulario" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Perfil_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="SP_Permiso_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="CodPadre" Nullable="false" />
+          <Property Type="Boolean" Name="EsFormulario" Nullable="false" />
+          <Property Type="String" Name="PathFormulario" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Provincia_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_Transporte_Consulta_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="NumFactura" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Estado" Nullable="false" />
+          <Property Type="Int32" Name="Prioridad" Nullable="false" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="Monto" Nullable="true" Precision="28" Scale="8" />
+          <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Detalle" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdChofer" Nullable="false" />
+          <Property Type="String" Name="DetallePago" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_Transporte_Obtener_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="NumFactura" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Estado" Nullable="false" />
+          <Property Type="Int32" Name="Prioridad" Nullable="false" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="Monto" Nullable="true" Precision="28" Scale="8" />
+          <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Detalle" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdChofer" Nullable="false" />
+          <Property Type="String" Name="DetallePago" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Chofer" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_Transporte_Obtener_NumFactura_Result">
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+          <Property Type="String" Name="NumFactura" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Estado" Nullable="false" />
+          <Property Type="Int32" Name="Prioridad" Nullable="false" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="Monto" Nullable="true" Precision="28" Scale="8" />
+          <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Detalle" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdChofer" Nullable="false" />
+          <Property Type="String" Name="DetallePago" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_Ubicacion_Obtener_Result">
+          <Property Type="Int32" Name="CodProvincia" Nullable="false" />
+          <Property Type="Int32" Name="CodCanton" Nullable="true" />
+          <Property Type="Int32" Name="CodDistrito" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Usuario_Consulta_Result">
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UsuarioWindows" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Cedula" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido1" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido2" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Telefono2" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="correo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Cod_Distrito" Nullable="false" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="62" />
+        </ComplexType>
+        <ComplexType Name="SP_Usuario_Obtener_Result">
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UsuarioWindows" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Clave" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Clave_Confirma" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Cedula" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido1" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido2" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Telefono2" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Cod_Distrito" Nullable="false" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_Usuario_Perfil_Consulta_Result">
+          <Property Type="String" Name="CodUsuario" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="CodPerfil" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_Validar_Usuario_Result">
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UsuarioWindows" Nullable="true" MaxLength="30" />
+          <Property Type="Binary" Name="Clave" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Cedula" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido1" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido2" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Telefono2" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Cod_Distrito" Nullable="false" />
+          <Property Type="String" Name="UsuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaModifica" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="utilityTransportModelStoreContainer" CdmEntityContainer="utilityTransportEntities" >
+          <FunctionImportMapping FunctionImportName="SP_Cambio_Clave" FunctionName="utilityTransportModel.Store.SP_Cambio_Clave" />
+          <FunctionImportMapping FunctionImportName="SP_Canton_Consulta" FunctionName="utilityTransportModel.Store.SP_Canton_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Canton_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Cod_Provincia" ColumnName="Cod_Provincia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Chofer_Consulta" FunctionName="utilityTransportModel.Store.SP_Chofer_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Chofer_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Distrito_Consulta" FunctionName="utilityTransportModel.Store.SP_Distrito_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Distrito_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Cod_Canton" ColumnName="Cod_Canton" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Obtener_Permisos_Usuario" FunctionName="utilityTransportModel.Store.SP_Obtener_Permisos_Usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Obtener_Permisos_Usuario_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodPadre" ColumnName="CodPadre" />
+                <ScalarProperty Name="EsFormulario" ColumnName="EsFormulario" />
+                <ScalarProperty Name="PathFormulario" ColumnName="PathFormulario" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Perfil_Consulta" FunctionName="utilityTransportModel.Store.SP_Perfil_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Perfil_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Permiso_Consulta" FunctionName="utilityTransportModel.Store.SP_Permiso_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Permiso_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodPadre" ColumnName="CodPadre" />
+                <ScalarProperty Name="EsFormulario" ColumnName="EsFormulario" />
+                <ScalarProperty Name="PathFormulario" ColumnName="PathFormulario" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Provincia_Consulta" FunctionName="utilityTransportModel.Store.SP_Provincia_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Provincia_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Transporte_Asignar_Prioridad" FunctionName="utilityTransportModel.Store.SP_Transporte_Asignar_Prioridad" />
+          <FunctionImportMapping FunctionImportName="SP_Transporte_Consulta" FunctionName="utilityTransportModel.Store.SP_Transporte_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Transporte_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="NumFactura" ColumnName="NumFactura" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="DetallePago" ColumnName="DetallePago" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Transporte_Enviar" FunctionName="utilityTransportModel.Store.SP_Transporte_Enviar" />
+          <FunctionImportMapping FunctionImportName="SP_Transporte_Mantenimiento" FunctionName="utilityTransportModel.Store.SP_Transporte_Mantenimiento" />
+          <FunctionImportMapping FunctionImportName="SP_Transporte_Obtener" FunctionName="utilityTransportModel.Store.SP_Transporte_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Transporte_Obtener_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="NumFactura" ColumnName="NumFactura" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="DetallePago" ColumnName="DetallePago" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+                <ScalarProperty Name="Chofer" ColumnName="Chofer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Transporte_Obtener_NumFactura" FunctionName="utilityTransportModel.Store.SP_Transporte_Obtener_NumFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Transporte_Obtener_NumFactura_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="NumFactura" ColumnName="NumFactura" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="DetallePago" ColumnName="DetallePago" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Ubicacion_Obtener" FunctionName="utilityTransportModel.Store.SP_Ubicacion_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Ubicacion_Obtener_Result">
+                <ScalarProperty Name="CodProvincia" ColumnName="CodProvincia" />
+                <ScalarProperty Name="CodCanton" ColumnName="CodCanton" />
+                <ScalarProperty Name="CodDistrito" ColumnName="CodDistrito" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Usuario_Consulta" FunctionName="utilityTransportModel.Store.SP_Usuario_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Usuario_Consulta_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="UsuarioWindows" ColumnName="UsuarioWindows" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="Cod_Distrito" ColumnName="Cod_Distrito" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Usuario_Mantenimiento" FunctionName="utilityTransportModel.Store.SP_Usuario_Mantenimiento" />
+          <FunctionImportMapping FunctionImportName="SP_Usuario_Obtener" FunctionName="utilityTransportModel.Store.SP_Usuario_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Usuario_Obtener_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="UsuarioWindows" ColumnName="UsuarioWindows" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Clave_Confirma" ColumnName="Clave_Confirma" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Cod_Distrito" ColumnName="Cod_Distrito" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Usuario_Perfil_Consulta" FunctionName="utilityTransportModel.Store.SP_Usuario_Perfil_Consulta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Usuario_Perfil_Consulta_Result">
+                <ScalarProperty Name="CodUsuario" ColumnName="CodUsuario" />
+                <ScalarProperty Name="CodPerfil" ColumnName="CodPerfil" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Validar_Usuario" FunctionName="utilityTransportModel.Store.SP_Validar_Usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="utilityTransportModel.SP_Validar_Usuario_Result">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="UsuarioWindows" ColumnName="UsuarioWindows" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+                <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Cod_Distrito" ColumnName="Cod_Distrito" />
+                <ScalarProperty Name="UsuarioCrea" ColumnName="UsuarioCrea" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
+                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

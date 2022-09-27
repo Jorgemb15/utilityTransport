@@ -1,0 +1,87 @@
+﻿@model UtilityTransport_DLL.Models.transporteInfoModel
+
+<script src="~/Scripts/UtilidadesJavaScript.js"></script>
+
+@{
+    if (this.Model != null && this.Model.Codigo != 0)
+    {
+        <table id="Tabla" name="Tabla" class="table table-bordered table-striped table-responsive-sm table-sm">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-6"></th>
+                    <th class="col-6"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="d-flex">
+                    <td class="col-6">Num. Factura</td>
+                    <td class="col-6">@Model.NumFactura</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Fecha Registro</td>
+                    <td class="col-6">@Model.FechaRegistro.ToString("MM/dd/yyyy hh:mm tt")</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Cliente</td>
+                    <td class="col-6">@Model.Cliente</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Detalle Envio</td>
+                    <td class="col-6">@Model.Detalle</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Chofer</td>
+                    <td class="col-6">@Model.Chofer</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Detalle Pago</td>
+                    <td class="col-6">@Model.DetallePago</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Registrado Por</td>
+                    <td class="col-6">@Model.UsuarioCrea</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Vendedor</td>
+                    <td class="col-6">@Model.Vendedor</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Monto</td>
+                    <td class="col-6">@Model.Monto</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-6">Fecha Ult. Modificación</td>
+                    <td class="col-6">@Model.FechaModifica.ToString("MM/dd/yyyy hh:mm tt")</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br />
+        if (Model.lblPuedeEnviar)
+        {
+            <div class="text-center">
+                <a id="Enviar" name="Enviar" CodTransporte='@Model.Codigo' title="Enviar" class="Enviar btn btn-success btn-success btn-md center-block w-75px" href="#"><i class="fa fa-car"></i> </a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center">
+            <h2>Sin Registros para Mostrar</h2>
+        </div>
+    }
+}
+
+<script>
+    $(".Enviar").click(function (e) {
+        e.preventDefault();
+        $("#ModalInfoTransporte").modal("hide");
+
+        var Codigo = $(this).attr('CodTransporte');
+        ProcesarEnvioTransporte(Codigo);
+
+        return false;
+    });
+
+
+</script>

@@ -1,0 +1,439 @@
+﻿@model UtilityTransport_DLL.Models.usuarioModel
+
+@{
+    ViewBag.Title = "Mantenimiento";
+    Layout = "~/Views/Shared/_LayoutPagePrincipal.cshtml";
+}
+
+<form name="frmFormulario" id="frmFormulario" method="post" style="position:relative">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="CodProceso" id="CodProceso" value="@ViewBag.strCodProceso" />
+
+    <input type="hidden" name="UsuarioCrea" id="UsuarioCrea" value="@(ViewBag.strCodProceso.Equals("I") ? "" : Model.UsuarioCrea)" />
+    <input type="hidden" name="FechaCrea" id="FechaCrea" value="@(ViewBag.strCodProceso.Equals("I") ? "" : Model.FechaCrea.ToString())" />
+
+    <div class="row col-lg-10">
+        <div class="col-lg-2">
+            <button title="Guardar" class="btn btn-success btn-success" value="Guardar" name="btnGuardar" id="btnGuardar">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+        </div>
+    </div>
+    <br />
+
+    <h2>Usuario</h2>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">CÓDIGO:</label>
+            <input class="form-control w-250" type="text" name="Codigo" id="Codigo" value="@Model.Codigo" @(ViewBag.strCodProceso.Equals("I") ? "" : "readonly") />
+        </div>
+        <div class="col-lg-4">
+            <label class="label">NOMBRE</label>
+            <input class="form-control w-250" type="text" name="Nombre" id="Nombre" value="@Model.Nombre" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">APELLIDO 1</label>
+            <input class="form-control w-250" type="text" name="Apellido1" id="Apellido1" value="@Model.Apellido1" />
+        </div>
+        <div class="col-lg-4">
+            <label class="label">APELLIDO 2</label>
+            <input class="form-control w-250" type="text" name="Apellido2" id="Apellido2" value="@Model.Apellido2" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">CEDULA</label>
+            <input class="form-control w-250 clsSoloNumeros" type="text" name="Cedula" id="Cedula" value="@Model.Cedula" />
+        </div>
+        <div class="col-lg-4">
+            <label class="label">ESTADO</label>
+            <div class="form">
+                <input class="form-check-inline" type="radio" name="Estado" id="Estado" value="A" @{if (Model.Estado != null) { @(Model.Estado.ToUpper().Equals("A") ? "checked" : "")  } } />Activo
+                <input class="form-check-inline" type="radio" name="Estado" id="Estado" value="I" @{if (Model.Estado != null) { @(Model.Estado.ToUpper().Equals("I") ? "checked" : "")  } } />Inactivo
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">GENERO</label>
+            <div class="form">
+                <input class="form-check-inline" type="radio" name="Genero" id="Genero" value="M" @{if (Model.Genero != null) { @(Model.Genero.ToUpper().Equals("M") ? "checked" : "")  } } />Masculino
+                <input class="form-check-inline" type="radio" name="Genero" id="Genero" value="F" @{if (Model.Genero != null) { @(Model.Genero.ToUpper().Equals("F") ? "checked" : "")  } } />Femenino
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <label class="label">FECHA NACIMIENTO</label>
+            <input class="form-control w-250" type="text" name="Fecha_Nacimiento" id="Fecha_Nacimiento" value="@(Model.Fecha_Nacimiento > DateTime.MinValue ? Model.Fecha_Nacimiento.ToString("MM/dd/yyyy") : "")" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">TENEFONO 1</label>
+            <input class="form-control w-250 clsSoloNumeros" type="text" name="Telefono1" id="Telefono1" value="@Model.Telefono1" />
+        </div>
+        <div class="col-lg-4">
+            <label class="label">TENEFONO 2</label>
+            <input class="form-control w-250 clsSoloNumeros" type="text" name="Telefono2" id="Telefono2" value="@Model.Telefono2" />
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">CORREO</label>
+            <input class="form-control w-250" type="text" name="Correo" id="Correo" value="@Model.Correo" />
+        </div>
+        <div class="col-lg-4">
+            <label class="label">PROVINCIA</label>
+            <select id="Cod_Provincia" name="Cod_Provincia" class="form-control w-250">
+                <option value="">Seleccione una Provincia</option>
+                @{
+                    foreach (UtilityTransport_DLL.Models.SP_Provincia_Consulta_Result lstProvincia
+                    in this.ViewBag.lstProvincia)
+                    {
+                        <option value="@lstProvincia.Codigo">@lstProvincia.Nombre</option>
+                    }
+                }
+            </select>
+        </div>
+
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">CANTÓN</label>
+            <select id="Cod_Canton" name="Cod_Canton" class="form-control w-250">
+                <option value="">Seleccione un Cantón</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <label class="label">DISTRITO</label>
+            <select name="Cod_Distrito" id="Cod_Distrito" class="form-control w-250">
+                <option value="">Seleccione un Distrito</option>
+            </select>
+        </div>
+    </div>
+    <br />
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">DIRECCIÓN</label>
+            <input class="form-control w-250" type="text" name="Direccion" id="Direccion" value="@Model.Direccion" />
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <label class="label">PERFIL</label>
+            <select id="Cod_Perfil" name="Cod_Perfil" class="form-control w-250">
+                <option value="">Seleccione un Perfil</option>
+                @{
+                    foreach (UtilityTransport_DLL.Models.SP_Perfil_Consulta_Result Perfil
+                    in this.ViewBag.lstPerfil)
+                    {
+                        if (Model.Cod_Perfil != 0)
+                        {
+                            <option value="@Perfil.Codigo" selected>@Perfil.Nombre</option>
+                        }
+                        else
+                        {
+                            <option value="@Perfil.Codigo">@Perfil.Nombre</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+    </div>
+    <br />
+
+    <div>
+        <div class="col-lg-1">
+            <a title="Regresar" class="btn btn-primary" href="@Response.ApplyAppPathModifier("~/Usuario/Lista")"><span class="fa fa-backward"></span> Regresar al Listado</a>
+        </div>
+    </div>
+
+</form>
+
+
+<script>
+const date = require("../../Scripts/globalize/date");
+
+    function ValidarControles() {
+        $("#frmFormulario").validate({
+            rules: {
+                Codigo: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
+                },
+                Nombre: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
+                },
+                Apellido1: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
+                },
+                Apellido2: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
+                },
+                Cedula: {
+                    required: true,
+                    number: true,
+                    minlength: 4,
+                    maxlength: 15
+                },
+                Estado: {
+                    required: true
+                },
+                Genero: {
+                    required: true
+                },
+                Fecha_Nacimiento: {
+                    required: true,
+                    date : true
+                },
+                Telefono1: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 8,
+                    number: true
+                },
+                Telefono2: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 8,
+                    number: true
+                },
+                Correo: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 50,
+                    email: true
+                },
+                Cod_Distrito: {
+                    required: true
+                },
+                Direccion: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 50
+                },
+                Cod_Perfil: {
+                    required: true
+                }
+            },
+            errorPlacement: function(error, element) {
+                element.attr("placeholder", error.text());
+            }
+        });
+        var strCodProceso = '@ViewBag.strCodProceso';
+            if (strCodProceso == "M") {
+                CargarUbicacionUsuario('@Model.Cod_Distrito');
+        }
+        AsignarFormatoFecha("#Fecha_Nacimiento");
+
+        LimitarLongitud('Telefono1', '8');
+        LimitarLongitud('Telefono2', '8');
+        LimitarLongitud('Cedula','15');
+    }
+
+    function EstableceEventosChange() {
+            $("#Cod_Provincia").change(function () {
+                var Cod_Provincia = $("#Cod_Provincia").val();
+                if (Cod_Provincia != '') {
+                    CargaDropdownListCantones(Cod_Provincia, null);
+                }
+                else
+                {
+                    var ddlCanton = $("#Cod_Canton");
+                    ddlCanton.empty();
+                    var ddlDistrito = $("#Cod_Distrito");
+                    ddlDistrito.empty();
+                    var NuevaOpcion = "<option value=''>";
+                    NuevaOpcion += "Seleccione un Distrito";
+                    NuevaOpcion += "</option>";
+                    ddlDistrito.append(NuevaOpcion);
+                    NuevaOpcion = "<option value=''>";
+                    NuevaOpcion += "Seleccione un Cantón";
+                    NuevaOpcion += "</option>";
+                    ddlCanton.append(NuevaOpcion);
+                 }
+            });
+
+             $("#Cod_Canton").change(function () {
+                 var Cod_Canton = $("#Cod_Canton").val();
+                 if (Cod_Canton != '') {
+                     CargaDropdownListDistritos(Cod_Canton, null);
+                 }
+                 else
+                 {
+                     var ddlDistrito = $("#Cod_Distrito");
+                    ddlDistrito.empty();
+                    var NuevaOpcion = "<option value=''>";
+                    NuevaOpcion += "Seleccione un Distrito";
+                    NuevaOpcion += "</option>";
+                    ddlDistrito.append(NuevaOpcion);
+                 }
+             });
+		}
+
+    function CargarUbicacionUsuario(pCodDistrito) {
+
+            var url = '@Url.Action("CargarUbicacion", "ubicacion")';
+            var parametros =
+            {
+                nCodDistrito: pCodDistrito
+            };
+
+            var nCodProvinciaUsuario = 0;
+            var nCodCodCantonUsuario = 0;
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(parametros),
+
+                success: function (data, textStatus, jQxhr) {
+                    $("#Cod_Provincia").val(data.CodProvincia);
+                    CargaDropdownListCantones(data.CodProvincia, data.CodCanton);
+                    CargaDropdownListDistritos(data.CodCanton, data.CodDistrito);
+                },
+
+                error: function (jQxhr, textStatus, errorThrown) {
+                    alert(jQxhr)
+                    alert(textStatus)
+                    alert(errorThrown)
+                }
+            });
+        }
+
+    function CargaDropdownListCantones(pCodProvincia, pCodCanton) {
+            var url = '@Url.Action("CargarCantones", "ubicacion")';
+            var parametros =
+            {
+                nCodProvincia: pCodProvincia
+            };
+
+            var ddlCanton = $("#Cod_Canton");
+            ddlCanton.empty();
+
+            var ddlDistrito = $("#Cod_Distrito");
+            ddlDistrito.empty();
+            var NuevaOpcionDistrito = "<option value=''>";
+            NuevaOpcionDistrito += "Seleccione un Distrito";
+            NuevaOpcionDistrito += "</option>";
+            ddlDistrito.append(NuevaOpcionDistrito);
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(parametros),
+
+                success: function (data, textStatus, jQxhr) {
+                    var nuevaOpcion = "<option value=''>";
+                    nuevaOpcion += "Seleccione un Cantón";
+                    nuevaOpcion += "</option>";
+
+                    ddlCanton.append(nuevaOpcion);
+
+                    $(data).each(function () {
+
+                        var objCantonActual = this;
+                        if (pCodCanton == objCantonActual.Codigo) {
+                            nuevaOpcion = "<option value='" + objCantonActual.Codigo + "' selected>";
+                        }
+                        else
+                        {
+                            nuevaOpcion = "<option value='" + objCantonActual.Codigo + "'>";
+                        }
+                        nuevaOpcion += objCantonActual.Nombre;
+                        nuevaOpcion += "</option>";
+
+                        ddlCanton.append(nuevaOpcion);
+                    });
+                },
+
+
+                error: function (jQxhr, textStatus, errorThrown) {
+                    alert(jQxhr)
+                    alert(textStatus)
+                    alert(errorThrown)
+                }
+            });
+        }
+
+    function CargaDropdownListDistritos(pCodCanton, pCodDistrito) {
+            var url = '@Url.Action("CargarDistritos","ubicacion")';
+            var parametros =
+            {
+                nCodCanton: pCodCanton
+            };
+
+            var ddlDistrito = $("#Cod_Distrito");
+            ddlDistrito.empty();
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(parametros),
+
+                success: function (data, textStatus, jQxhr) {
+                    var nuevaOpcion = "<option value=''>";
+                    nuevaOpcion += "Seleccione un Distrito";
+                    nuevaOpcion += "</option>";
+
+                    ddlDistrito.append(nuevaOpcion);
+
+                    $(data).each(function () {
+
+                        var objDistritoActual = this;
+                        if (pCodDistrito == objDistritoActual.Codigo) {
+                            nuevaOpcion = "<option value='" + objDistritoActual.Codigo + "' selected>";
+                        }
+                        else
+                        {
+                            nuevaOpcion = "<option value='" + objDistritoActual.Codigo + "'>";
+                        }
+                        nuevaOpcion += objDistritoActual.Nombre;
+                        nuevaOpcion += "</option>";
+
+                        ddlDistrito.append(nuevaOpcion);
+                    });
+                },
+
+                error: function (jQxhr, textStatus, errorThrown) {
+                    alert(jQxhr)
+                    alert(textStatus)
+                    alert(errorThrown)
+                }
+            });
+        }
+
+</script>
