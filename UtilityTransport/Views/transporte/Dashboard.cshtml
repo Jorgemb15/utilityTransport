@@ -22,9 +22,9 @@
         <div class="col-lg-3">
             <label class="label">ESTADO</label>
             <select id="nEstado" name="nEstado" class="form-control w-250">
-                <option value="0" @(Model.nEstado == 0 ? "selected":"")>Pendiente</option>
-                <option value="1" @(Model.nEstado == 1 ? "selected":"")>Enviado</option>
-                <option value="" @(Model.nEstado is null ? "selected":"") >Todos</option>
+                <option value="0" @(Model.nEstado == 0 ? "selected" : "")>Pendiente</option>
+                <option value="1" @(Model.nEstado == 1 ? "selected" : "")>Enviado</option>
+                <option value="" @(Model.nEstado is null ? "selected" : "")>Todos</option>
             </select>
         </div>
     </div>
@@ -78,18 +78,18 @@
                     {
                         string strBGColor = "";
                         strBGColor = PosicionModelo.Estado == 0 ? "bgcolor=#F39C12" : "bgcolor=#52DC33";
-                    <tr class="d-flex">
-                        <td @strBGColor class="col-2">@(PosicionModelo.Prioridad != 99 ? "Prioridad " + PosicionModelo.Prioridad.ToString() : "Enviado sin Prioridad")</td>
-                        <td @strBGColor class="col-2">@PosicionModelo.NumFactura</td>
-                        <td @strBGColor class="col-2">@PosicionModelo.Cliente</td>
-                        <td @strBGColor class="col-2">@PosicionModelo.FechaRegistro.ToString("MM/dd/yyyy hh:mm tt")</td>
-                        <td @strBGColor class="col-3">@PosicionModelo.Detalle</td>
-                        <td @strBGColor class="col-1">
-                            <div class="text-center">
-                                <a id="EnviarTransporte" name="btnEnviar" title="Enviar Transporte" href="#" class="btn btn-info" onclick="EnviarTransporte(@PosicionModelo.Codigo, @(PosicionModelo.Estado == 0 ? "true" : "false"))"><span class="fa fa-car"></span></a>
-                            </div>
-                        </td>
-                    </tr>
+                        <tr class="d-flex">
+                            <td @strBGColor class="col-2">@(PosicionModelo.Prioridad != 99 ? "Prioridad " + PosicionModelo.Prioridad.ToString() : "Enviado sin Prioridad")</td>
+                            <td @strBGColor class="col-2">@PosicionModelo.NumFactura</td>
+                            <td @strBGColor class="col-2">@PosicionModelo.Cliente</td>
+                            <td @strBGColor class="col-2">@PosicionModelo.FechaRegistro.ToString("MM/dd/yyyy hh:mm tt")</td>
+                            <td @strBGColor class="col-3">@PosicionModelo.Detalle</td>
+                            <td @strBGColor class="col-1">
+                                <div class="text-center">
+                                    <a id="EnviarTransporte" name="btnEnviar" title="Enviar Transporte" href="#" class="btn btn-info" onclick="EnviarTransporte(@PosicionModelo.Codigo, @(PosicionModelo.Estado == 0 ? "true" : "false"))"><span class="fa fa-car"></span></a>
+                                </div>
+                            </td>
+                        </tr>
                     }
 
                 </tbody>
@@ -107,7 +107,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Productos</h4>
+                    <h4 class="modal-title">Transporte</h4>
                 </div>
                 <div class="modal-body">
                     <div id="divInfoTransporte" class="col-xl-12">

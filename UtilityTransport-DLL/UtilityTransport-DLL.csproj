@@ -115,6 +115,7 @@
     <Compile Include="Models\perfilConsultaModel.cs" />
     <Compile Include="Models\perfilService.cs" />
     <Compile Include="Models\provinciaConsultaModel.cs" />
+    <Compile Include="Models\ReporteModel.cs" />
     <Compile Include="Models\SP_Canton_Consulta_Result.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>

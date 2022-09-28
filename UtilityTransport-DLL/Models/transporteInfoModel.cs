@@ -8,6 +8,7 @@ namespace UtilityTransport_DLL.Models
 {
     public class transporteInfoModel
     {
+        public Boolean lblPuedeImprimir { get; set; }
         public Boolean lblPuedeEnviar { get; set; }
         public int Codigo { get; set; }
         public string NumFactura { get; set; }

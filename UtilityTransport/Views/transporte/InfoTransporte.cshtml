@@ -63,6 +63,12 @@
                 <a id="Enviar" name="Enviar" CodTransporte='@Model.Codigo' title="Enviar" class="Enviar btn btn-success btn-success btn-md center-block w-75px" href="#"><i class="fa fa-car"></i> </a>
             </div>
         }
+        if (Model.lblPuedeImprimir)
+        {
+            <div class="text-center">
+                <a id="Imprimir" name="Imprimir" title="Imprimir" class="btn btn-success btn-success btn-md center-block w-75px" onclick="Imprimir()"><i class="fa fa-print"></i> </a>
+            </div>
+        }
     }
     else
     {
@@ -82,6 +88,8 @@
 
         return false;
     });
-
+    function Imprimir() {
+        window.location.href = "@Url.RouteUrl(new { Controller = "transporte", Action = "Imprimir" })/?nCodTransporte=" + '@Model.Codigo.ToString()';
+    }
 
 </script>
